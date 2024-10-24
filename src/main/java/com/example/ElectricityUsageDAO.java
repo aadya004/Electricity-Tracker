@@ -19,7 +19,7 @@ public class ElectricityUsageDAO {
     // Create: Insert a new electricity usage record
     public void insertUsage(ElectricityUsage usage) {
         Document doc = new Document("usage", usage.getUsage())
-                .append("timestamp", usage.getTimestamp());
+                    .append("day", usage.getDay()).append("timestamp", usage.getTimestamp());
         collection.insertOne(doc);
     }
 
@@ -29,6 +29,7 @@ public class ElectricityUsageDAO {
         for (Document doc : collection.find()) {
             ElectricityUsage usage = new ElectricityUsage();
             usage.setId(doc.getObjectId("_id").toString());
+            usage.setDay(doc.getString("day"));
             usage.setUsage(doc.getDouble("usage"));
             usage.setTimestamp(doc.getString("timestamp"));
             usages.add(usage);
@@ -39,7 +40,7 @@ public class ElectricityUsageDAO {
     // Update: Update an existing electricity usage record
     public void updateUsage(ElectricityUsage usage) {
         Document updatedDocument = new Document("usage", usage.getUsage())
-                .append("timestamp", usage.getTimestamp());
+        .append("day", usage.getDay()).append("timestamp", usage.getTimestamp());
 
         collection.updateOne(
                 new Document("_id", new ObjectId(usage.getId())), // Filter by ID

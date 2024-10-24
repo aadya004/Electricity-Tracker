@@ -7,10 +7,10 @@ public class Main {
         ElectricityUsageService service = new ElectricityUsageService();
 
         // 1. Add new usage records
-        service.addUsage(150.75, "2024-10-12T10:00:00");
+        service.addUsage("Thursday",150.75, "2024-10-10T10:00:00");
         System.out.println("Added Usage Record.");
 
-        service.addUsage(200.50, "2024-10-13T11:30:00");
+        service.addUsage("Friday", 200.50, "2024-10-11T11:30:00");
         System.out.println("Added Usage Record.");
 
         // 2. Retrieve and print all usage records
@@ -23,7 +23,7 @@ public class Main {
         // 3. Update an existing record (assuming there is at least one record)
         if (!allUsages.isEmpty()) {
             String idToUpdate = allUsages.get(0).getId();
-            service.updateUsage(idToUpdate, 180.25, "2024-10-12T12:00:00");
+            service.updateUsage(idToUpdate, "Saturday", 180.25, "2024-10-12T12:00:00");
             System.out.println("Updated Usage Record with ID: " + idToUpdate);
         }
 
@@ -38,7 +38,7 @@ public class Main {
         allUsages = service.getAllUsages();
         System.out.println("All Usage Records after deletion:");
         for (ElectricityUsage u : allUsages) {
-            System.out.println("ID: " + u.getId() + ", Usage: " + u.getUsage() + " kWh, Timestamp: " + u.getTimestamp());
+            System.out.println("ID: " + u.getId() + ", Day: "+u.getDay() + ", Usage: " + u.getUsage() + " kWh, Timestamp: " + u.getTimestamp());
         }
     }
 }

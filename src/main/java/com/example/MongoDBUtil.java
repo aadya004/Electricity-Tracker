@@ -5,7 +5,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoDBUtil {
-    private static MongoClient mongoClient; // Keep MongoClient instance
+    private static MongoClient mongoClient; 
     private static MongoDatabase database;
 
     public static MongoDatabase getDatabase() {
